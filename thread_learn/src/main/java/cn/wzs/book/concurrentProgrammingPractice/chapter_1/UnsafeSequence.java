@@ -1,14 +1,29 @@
 package cn.wzs.book.concurrentProgrammingPractice.chapter_1;
 
+import cn.wzs.book.concurrentProgrammingPractice.common.annotations.NotThreadSafe;
 import cn.wzs.book.concurrentProgrammingPractice.common.annotations.ThreadSafe;
 import cn.wzs.book.concurrentProgrammingPractice.common.threadpool.ThreadPoolUtils;
 
-@ThreadSafe
+/**
+ * 安全性问题demo
+ */
 public class UnsafeSequence {
 
     private int value;
 
+    /*
+    不安全方法
+     */
+    @NotThreadSafe
     public int getNext() {
+        return value++;
+    }
+
+    /*
+    安全方法
+     */
+    @ThreadSafe
+    public synchronized int getSafeNext() {
         return value++;
     }
 
